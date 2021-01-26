@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/CyptOGG.ogg-2b8d3f9c718a0c843039147268f442e9.oggstr"
+
+[deps]
+
+source_file="res://Assets/Music/CyptOGG.ogg"
+dest_files=[ "res://.import/CyptOGG.ogg-2b8d3f9c718a0c843039147268f442e9.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0
