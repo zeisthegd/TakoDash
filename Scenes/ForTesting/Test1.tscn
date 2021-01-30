@@ -8,37 +8,38 @@
 [node name="Test1" type="Node2D"]
 
 [node name="Tako" parent="." instance=ExtResource( 2 )]
-position = Vector2( 171.249, 441.52 )
+position = Vector2( 99.5222, 137.586 )
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="Tako"]
+position = Vector2( 0, -70 )
 remote_path = NodePath("../../Camera2D")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2( 171.249, 441.52 )
+position = Vector2( 99.5222, 67.5861 )
 current = true
 limit_left = 0
 limit_top = -100000000
-limit_right = 360
-limit_bottom = 640
+limit_right = 180
+limit_bottom = 320
 smoothing_enabled = true
-smoothing_speed = 2.0
+smoothing_speed = 6.0
 
 [node name="Rocks" type="Node" parent="."]
 
 [node name="Rock2D" parent="Rocks" instance=ExtResource( 3 )]
-position = Vector2( 71.8061, 189.192 )
+position = Vector2( 39.0482, 201.791 )
 
 [node name="Rock2D2" parent="Rocks" instance=ExtResource( 3 )]
-position = Vector2( 42.622, 410.317 )
+position = Vector2( 120.528, 123.055 )
 
 [node name="Rock2D3" parent="Rocks" instance=ExtResource( 3 )]
-position = Vector2( 171.705, 347.459 )
+position = Vector2( 135.167, 192.489 )
 
 [node name="Rock2D4" parent="Rocks" instance=ExtResource( 3 )]
-position = Vector2( 234.563, 128.579 )
+position = Vector2( 141.329, 287.329 )
 
 [node name="Rock2D5" parent="Rocks" instance=ExtResource( 3 )]
-position = Vector2( 279.462, 372.154 )
+position = Vector2( 46.3766, 88.6718 )
 
 [node name="DebugUI" parent="." instance=ExtResource( 1 )]
 

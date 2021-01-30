@@ -39,8 +39,17 @@ class PlayerMovement : RigidBody2D
     {
         base._Process(delta);
         IncreaseDashSpeed();
+        RotateTako();
     }
 
+    private void RotateTako()
+    {
+        if(screenTouched)
+        {
+            tako.LookAt(tako.GetGlobalMousePosition());
+            tako.RotationDegrees += 90;
+        }
+    }
 
     public void HandleTouchInput(InputEvent @event)
     {
@@ -55,7 +64,8 @@ class PlayerMovement : RigidBody2D
     {
         if (touchEvent.Pressed)
         {
-            screenTouched = true;     
+            screenTouched = true;
+            tako.LookAt(GetGlobalTouchPosition(touchEvent.Position));
         }
     }
 

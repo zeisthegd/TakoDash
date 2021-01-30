@@ -3,7 +3,7 @@
 [ext_resource path="res://icon.png" type="Texture" id=1]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 16, 16 )
+extents = Vector2( 8, 8 )
 
 [node name="Rock" type="StaticBody2D"]
 
@@ -11,5 +11,5 @@ extents = Vector2( 16, 16 )
 shape = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
-scale = Vector2( 0.5, -0.5 )
+scale = Vector2( 0.25, 0.25 )
 texture = ExtResource( 1 )
