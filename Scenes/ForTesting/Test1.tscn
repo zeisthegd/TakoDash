@@ -8,14 +8,14 @@
 [node name="Test1" type="Node2D"]
 
 [node name="Tako" parent="." instance=ExtResource( 2 )]
-position = Vector2( 99.5222, 137.586 )
+position = Vector2( 100, 300 )
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="Tako"]
 position = Vector2( 0, -70 )
 remote_path = NodePath("../../Camera2D")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2( 99.5222, 67.586 )
+position = Vector2( 100, 230 )
 current = true
 limit_left = 0
 limit_top = -100000000

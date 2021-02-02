@@ -1,16 +1,24 @@
 using Godot;
 using System;
 
-public class PlayingUI : CanvasLayer
+public class PlayingUI : CanvasLayer, HasComponents
 {
     InkMeter inkMeter;
+    
 
     
 
     public override void _Ready()
     {
-        inkMeter = (InkMeter)GetNode("InkMeter");
+        GetComponents();
     }
+
+    public void GetComponents()
+    {
+        inkMeter = (InkMeter)GetNode("InkMeter");
+       
+    }
+
 
     public InkMeter InkMeter { get => inkMeter;}
 }

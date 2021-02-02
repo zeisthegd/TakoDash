@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 
 class PlayerMovement : RigidBody2D
 {
+    #region Fields
+
     private Tako tako;
     private Vector2 destination = new Vector2();
     private Vector2 velocity = new Vector2();
@@ -17,6 +19,17 @@ class PlayerMovement : RigidBody2D
     private float speedAddPerFrame = 100;
 
     private bool screenTouched = false;
+
+    #endregion
+
+    #region Signals
+    [Signal]
+    public delegate void TouchScreenEvent();
+
+    
+
+    #endregion
+
 
     public PlayerMovement()
     {
@@ -65,6 +78,7 @@ class PlayerMovement : RigidBody2D
         if (touchEvent.Pressed)
         {
             screenTouched = true;
+            EmitSignal(nameof(TouchScreenEvent));
             tako.LookAt(GetGlobalTouchPosition(touchEvent.Position));
         }
     }
@@ -72,10 +86,10 @@ class PlayerMovement : RigidBody2D
     public void ReleaseTouch(InputEventScreenTouch touchEvent)
     {
         if (!touchEvent.Pressed)
-        {
-            destination = GetGlobalTouchPosition(touchEvent.Position);
-            FindDirection();
+        {                       
+            FindDirection(touchEvent.Position);
             TakoDash();
+            EmitSignal(nameof(TouchScreenEvent));
         }
     }
 
@@ -95,8 +109,9 @@ class PlayerMovement : RigidBody2D
             dashSpeed += speedAddPerFrame;
     }
 
-    private void FindDirection()
+    private void FindDirection(Vector2 touchPosition)
     {
+        destination = GetGlobalTouchPosition(touchPosition);
         direction = destination - tako.GlobalPosition;
     }
 
@@ -123,6 +138,7 @@ class PlayerMovement : RigidBody2D
     #region Properties
 
     public Vector2 Velocity { get => velocity; }
+    public bool ScreenTouched { get => screenTouched; set => screenTouched = value; }
 
     #endregion
 

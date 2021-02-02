@@ -8,19 +8,23 @@
     ".NETFramework,Version=v4.7.2": []
   },
   "packageFolders": {
-    "C:\\Users\\Admin\\.nuget\\packages\\": {}
+    "C:\\Users\\Nguyen\\.nuget\\packages\\": {},
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Godot\\Projects\\TakoDash\\Tako Dash.csproj",
+      "projectUniqueName": "C:\\Users\\Nguyen\\Desktop\\Start Up\\Godot\\2D\\TakoDash\\Tako Dash.csproj",
       "projectName": "Tako Dash",
-      "projectPath": "D:\\Godot\\Projects\\TakoDash\\Tako Dash.csproj",
-      "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-      "outputPath": "D:\\Godot\\Projects\\TakoDash\\.mono\\temp\\obj\\",
+      "projectPath": "C:\\Users\\Nguyen\\Desktop\\Start Up\\Godot\\2D\\TakoDash\\Tako Dash.csproj",
+      "packagesPath": "C:\\Users\\Nguyen\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Nguyen\\Desktop\\Start Up\\Godot\\2D\\TakoDash\\.mono\\temp\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+      ],
       "configFilePaths": [
-        "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Nguyen\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -32,7 +36,6 @@
       },
       "frameworks": {
         "net472": {
-          "targetAlias": "net472",
           "projectReferences": {}
         }
       },
@@ -43,10 +46,7 @@
       }
     },
     "frameworks": {
-      "net472": {
-        "targetAlias": "net472",
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.102\\RuntimeIdentifierGraph.json"
-      }
+      "net472": {}
     }
   }
 }

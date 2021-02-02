@@ -10,8 +10,7 @@ public class SceneManager : Node
     public override void _Ready()
     {
         Viewport root = GetTree().Root;
-        CurrentScene = root.GetChild(root.GetChildCount() - 1);
-        dynamicMusic = (DynamicMusic)GetTree().Root.GetNode("DynamicMusic");
+        CurrentScene = root.GetChild(root.GetChildCount() - 1); 
     }
 
     public void GotoScene(string path)

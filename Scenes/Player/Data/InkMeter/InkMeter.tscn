@@ -1,20 +1,29 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Scenes/Player/Data/InkMeter/InkMeter.cs" type="Script" id=1]
+[ext_resource path="res://Assets/Art/UI/PlayingUI/InkMeter/InkMeter1.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Art/UI/PlayingUI/InkMeter/InkMeter2.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Art/UI/PlayingUI/InkMeter/InkMeter3.png" type="Texture" id=4]
 
 [node name="InkMeter" type="Control"]
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+inkUseToDashPerFrame = 2
 
 [node name="Ink" type="TextureProgress" parent="."]
-margin_right = 64.0
-margin_bottom = 64.0
-rect_scale = Vector2( 4.282, 0.5 )
+margin_right = 6.0
+margin_bottom = 160.0
 value = 100.0
+texture_under = ExtResource( 4 )
+texture_over = ExtResource( 2 )
+texture_progress = ExtResource( 3 )
+fill_mode = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Tween" type="Tween" parent="."]
+[node name="InkTween" type="Tween" parent="."]
+playback_speed = 0.1
+playback/speed = 0.1
