@@ -1,14 +1,14 @@
 using Godot;
 using System;
 
-public class InkMeter : Control, HasComponents
+public class InkMeter : Control, HasComponents, HasTouchHandling
 {
 
     [Export]
-    int inkUseToDashPerFrame = 5;
+    int inkUseToDashPerFrame = 10;
     [Export]
     int baseInk = 100;
-
+    
     Tako tako;
 
     bool screenTouched;
@@ -17,6 +17,8 @@ public class InkMeter : Control, HasComponents
     TextureProgress inkAmount;
     Tween inkTween;
 
+    [Signal]
+    public delegate void OutOfInk();
 
     public override void _Ready()
     {
@@ -24,15 +26,10 @@ public class InkMeter : Control, HasComponents
         GetTako();
     }
 
-    private void GetTako()
+    public override void _Input(InputEvent @event)
     {
-        tako = (Tako)SceneManager.CurrentScene.GetNode("Tako");
-        tako.PlayerMovement.Connect(nameof(PlayerMovement.TouchScreenEvent), this, nameof(SetScreenTouch));
-    }
-
-    private void SetScreenTouch()
-    {
-        this.screenTouched = tako.PlayerMovement.ScreenTouched;
+        base._Input(@event);
+        HandleTouchInput(@event);
     }
 
     public override void _Process(float delta)
@@ -41,6 +38,40 @@ public class InkMeter : Control, HasComponents
         UpdateRemainingInk();
         if (Input.IsActionJustPressed("refill_ink"))
             RefillInkToFull();
+    }
+
+    
+
+    public void GetComponents()
+    {
+        inkAmount = (TextureProgress)GetNode("Ink");
+        inkTween = (Tween)GetNode("InkTween");
+    }
+
+    public void HandleTouchInput(InputEvent @event)
+    {
+        if(@event is InputEventScreenTouch touchEvent)
+        {
+            TouchAndHoldScreen(touchEvent);
+            ReleaseTouch(touchEvent);
+        }
+    }
+
+    public void TouchAndHoldScreen(InputEventScreenTouch touchEvent)
+    {
+        if(touchEvent.Pressed)
+        {
+            screenTouched = true;
+        }
+        
+    }
+
+    public void ReleaseTouch(InputEventScreenTouch touchEvent)
+    {
+        if (!touchEvent.Pressed)
+        {
+            screenTouched = false;
+        }
     }
 
     private void UpdateRemainingInk()
@@ -52,11 +83,7 @@ public class InkMeter : Control, HasComponents
         }
     }
 
-    public void GetComponents()
-    {
-        inkAmount = (TextureProgress)GetNode("Ink");
-        inkTween = (Tween)GetNode("InkTween");
-    }
+    
 
     public int DecreaseInkNormally()
     {
@@ -91,7 +118,21 @@ public class InkMeter : Control, HasComponents
         return remainInk;
     }
 
-    
+    private void GetTako()
+    {
+        tako = SceneManager.Tako;
+        Connect(nameof(OutOfInk), tako.PlayerMovement, nameof(tako.PlayerMovement.OutOfInk));
+    }
+
+    public void OnInkValueChanged(float value)
+    {
+        if(value <= 0)
+        {
+            value = 0;
+            EmitSignal(nameof(OutOfInk));
+        }
+    }
+
 
     public int Ink { get => remainInk; }
 }

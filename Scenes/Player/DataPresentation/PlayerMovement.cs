@@ -5,45 +5,28 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-class PlayerMovement : RigidBody2D
+class PlayerMovement : RigidBody2D, HasTouchHandling
 {
     #region Fields
 
     private Tako tako;
-    private Vector2 destination = new Vector2();
-    private Vector2 velocity = new Vector2();
-    private Vector2 direction = new Vector2();
-    private float minDashSpeed = 50;
-
-    private float dashSpeed;
-    private float speedAddPerFrame = 100;
-
+    private Vector2 touchPosition;
     private bool screenTouched = false;
 
-    #endregion
-
-    #region Signals
-    [Signal]
-    public delegate void TouchScreenEvent();
-
-    
+    DashType dashType;
 
     #endregion
-
-
-    public PlayerMovement()
-    {
-
-    }
+    public PlayerMovement(){}
     public PlayerMovement(Tako tako)
     {
         this.tako = tako;
-        dashSpeed = minDashSpeed;
+        
+        dashType = new NormalDash();
     }
 
     public override void _Input(InputEvent @event)
     {
-        base._UnhandledInput(@event);
+        base._Input(@event);
         HandleTouchInput(@event);
     }
 
@@ -51,17 +34,7 @@ class PlayerMovement : RigidBody2D
     public override void _Process(float delta)
     {
         base._Process(delta);
-        IncreaseDashSpeed();
-        RotateTako();
-    }
-
-    private void RotateTako()
-    {
-        if(screenTouched)
-        {
-            tako.LookAt(tako.GetGlobalMousePosition());
-            tako.RotationDegrees += 90;
-        }
+        dashType.Process();
     }
 
     public void HandleTouchInput(InputEvent @event)
@@ -77,67 +50,39 @@ class PlayerMovement : RigidBody2D
     {
         if (touchEvent.Pressed)
         {
+            touchPosition = touchEvent.Position;
             screenTouched = true;
-            EmitSignal(nameof(TouchScreenEvent));
-            tako.LookAt(GetGlobalTouchPosition(touchEvent.Position));
+            tako.LookAt(Coordinator.GetGlobalTouchPosition(touchPosition));
         }
     }
 
     public void ReleaseTouch(InputEventScreenTouch touchEvent)
     {
-        if (!touchEvent.Pressed)
-        {                       
-            FindDirection(touchEvent.Position);
-            TakoDash();
-            EmitSignal(nameof(TouchScreenEvent));
+        if (touchEvent.Pressed == false)
+        {
+            touchPosition = touchEvent.Position;
+            dashType.Dash(touchPosition);
+            screenTouched = false;
         }
     }
 
-    public void TakoDash()
-    {
-        CompletelyStopTheBody();
-        velocity = new Vector2();
-        velocity = direction.Normalized() * dashSpeed;
-        tako.ApplyImpulse(Vector2.Zero, velocity);
-
-        ResetDashProperties();
+    public void OutOfInk()
+    {       
+        dashType.Dash(touchPosition);
+        dashType = new NoDash();
     }
 
-    private void IncreaseDashSpeed()
-    {
-        if(screenTouched)
-            dashSpeed += speedAddPerFrame;
-    }
 
-    private void FindDirection(Vector2 touchPosition)
-    {
-        destination = GetGlobalTouchPosition(touchPosition);
-        direction = destination - tako.GlobalPosition;
-    }
 
-    private void CompletelyStopTheBody()
-    {
-        tako.LinearVelocity = Vector2.Zero;
-    }
+    
 
-    private void ResetDashProperties()
-    {
-        velocity = new Vector2();
-        direction = new Vector2();
-        destination = new Vector2();
-        screenTouched = false;
-        dashSpeed = minDashSpeed;
-    }
+    
 
-    public Vector2 GetGlobalTouchPosition(Vector2 touchEventPosition)
-    {
-       Vector2 globalTouchPos = tako.GetCanvasTransform().AffineInverse().Xform(touchEventPosition);
-       return globalTouchPos;
-    }
+    
 
     #region Properties
 
-    public Vector2 Velocity { get => velocity; }
+    
     public bool ScreenTouched { get => screenTouched; set => screenTouched = value; }
 
     #endregion
