@@ -44,6 +44,7 @@ public class Tako : RigidBody2D, HasComponents
     #region Properties
     public AnimationPlayer AnimationPlayer { get => animationPlayer; }
     internal PlayerMovement PlayerMovement { get => playerMovement;}
+    public Sprite SpriteSheet { get => spriteSheet; set => spriteSheet = value; }
     #endregion
 
     #region Signals

@@ -10,9 +10,10 @@ class NoDash : DashType
     public NoDash():base()
     {}
 
-    public override void Dash(Vector2 touchPosition)
+
+    public override void ExecuteDashAlgo(Vector2 touchPosition)
     {
-        //Play animation
+        throw new NotImplementedException();
     }
 
     public override void Process()

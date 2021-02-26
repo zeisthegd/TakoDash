@@ -14,24 +14,30 @@ abstract class DashType : RigidBody2D
     protected Vector2 velocity = new Vector2();
     protected Vector2 direction = new Vector2();
 
-    protected float minDashSpeed = 50;
-    protected float dashSpeed;
-    protected float speedAddPerFrame = 10;
+    
+
+    private bool enabled = true;
 
     public DashType() 
     {
-        dashSpeed = minDashSpeed;
         tako = SceneManager.Tako;
     }
-    public abstract void Dash(Vector2 touchPosition);
+
+    public void Dash(Vector2 touchPosition)
+    {
+        if (Enabled)
+            ExecuteDashAlgo(touchPosition);
+         ResetDashProperties();
+    }
+
+    public abstract void ExecuteDashAlgo(Vector2 touchPosition);
     public abstract void Process();
 
-    protected void ResetDashProperties()
+    protected virtual void ResetDashProperties()
     {
         velocity = new Vector2();
         direction = new Vector2();
         destination = new Vector2();
-        dashSpeed = minDashSpeed;
     }
 
     protected void FindDirection(Vector2 touchPosition)
@@ -40,7 +46,6 @@ abstract class DashType : RigidBody2D
         direction = destination - tako.GlobalPosition;
     }
 
-    
-
     public Vector2 Velocity { get => velocity; }
+    public bool Enabled { get => enabled; set => enabled = value; }
 }

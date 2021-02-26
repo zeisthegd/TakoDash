@@ -1,2 +1,0 @@
-# TakoDash
- Tako Dash project

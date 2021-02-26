@@ -19,8 +19,7 @@ class PlayerMovement : RigidBody2D, HasTouchHandling
     public PlayerMovement(){}
     public PlayerMovement(Tako tako)
     {
-        this.tako = tako;
-        
+        this.tako = tako;      
         dashType = new NormalDash();
     }
 
@@ -51,8 +50,8 @@ class PlayerMovement : RigidBody2D, HasTouchHandling
         if (touchEvent.Pressed)
         {
             touchPosition = touchEvent.Position;
-            screenTouched = true;
             tako.LookAt(Coordinator.GetGlobalTouchPosition(touchPosition));
+            screenTouched = true;
         }
     }
 
@@ -66,19 +65,20 @@ class PlayerMovement : RigidBody2D, HasTouchHandling
         }
     }
 
+    public void HaveInk()
+    {
+        dashType.Enabled = true;
+    }
+
     public void OutOfInk()
-    {       
+    {
+        if(screenTouched)
+            touchPosition = Coordinator.GetGlobalTouchPosition(tako.GetGlobalMousePosition());
         dashType.Dash(touchPosition);
-        dashType = new NoDash();
+        dashType.Enabled = false;
     }
 
 
-
-    
-
-    
-
-    
 
     #region Properties
 

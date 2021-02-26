@@ -19,6 +19,8 @@ public class InkMeter : Control, HasComponents, HasTouchHandling
 
     [Signal]
     public delegate void OutOfInk();
+    [Signal]
+    public delegate void HaveInk();
 
     public override void _Ready()
     {
@@ -122,15 +124,18 @@ public class InkMeter : Control, HasComponents, HasTouchHandling
     {
         tako = SceneManager.Tako;
         Connect(nameof(OutOfInk), tako.PlayerMovement, nameof(tako.PlayerMovement.OutOfInk));
+        Connect(nameof(HaveInk), tako.PlayerMovement, nameof(tako.PlayerMovement.HaveInk));
     }
 
     public void OnInkValueChanged(float value)
     {
-        if(value <= 0)
+        if (value <= 0)
         {
             value = 0;
             EmitSignal(nameof(OutOfInk));
         }
+        else EmitSignal(nameof(HaveInk));
+
     }
 
 

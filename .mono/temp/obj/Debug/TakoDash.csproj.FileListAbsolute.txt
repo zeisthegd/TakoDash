@@ -1,0 +1,8 @@
+C:\Users\Nguyen\Desktop\Start Up\Godot\2D\TakoDash\.mono\temp\bin\Debug\TakoDash.dll
+C:\Users\Nguyen\Desktop\Start Up\Godot\2D\TakoDash\.mono\temp\bin\Debug\TakoDash.pdb
+C:\Users\Nguyen\Desktop\Start Up\Godot\2D\TakoDash\.mono\temp\obj\Debug\TakoDash.csprojAssemblyReference.cache
+C:\Users\Nguyen\Desktop\Start Up\Godot\2D\TakoDash\.mono\temp\obj\Debug\TakoDash.AssemblyInfoInputs.cache
+C:\Users\Nguyen\Desktop\Start Up\Godot\2D\TakoDash\.mono\temp\obj\Debug\TakoDash.AssemblyInfo.cs
+C:\Users\Nguyen\Desktop\Start Up\Godot\2D\TakoDash\.mono\temp\obj\Debug\TakoDash.csproj.CoreCompileInputs.cache
+C:\Users\Nguyen\Desktop\Start Up\Godot\2D\TakoDash\.mono\temp\obj\Debug\TakoDash.dll
+C:\Users\Nguyen\Desktop\Start Up\Godot\2D\TakoDash\.mono\temp\obj\Debug\TakoDash.pdb
